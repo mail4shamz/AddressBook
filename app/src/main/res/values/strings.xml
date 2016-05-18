@@ -12,4 +12,5 @@
     <string name="edit_contacts_title">Edit Contacts</string>
     <string name="edit_contacts_button">EDIT</string>
     <string name="delete_contacts_button">DELETE</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
