@@ -48,7 +48,10 @@
             android:ems="10"
             android:layout_weight="1"
             android:id="@+id/etFirstName"
-            android:layout_column="2" />
+            android:layout_column="2">
+            <requestFocus/>
+        </EditText>
+
     </TableRow>
 
     <TableRow

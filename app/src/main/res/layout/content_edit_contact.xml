@@ -47,7 +47,9 @@
             android:hint="Name"
             android:ems="10"
             android:layout_weight="1"
-            android:id="@+id/etFirstName"/>
+            android:id="@+id/etFirstName">
+            <requestFocus/>
+        </EditText>
     </TableRow>
 
     <TableRow
