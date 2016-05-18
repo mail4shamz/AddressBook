@@ -13,4 +13,5 @@
     <string name="edit_contacts_button">EDIT</string>
     <string name="delete_contacts_button">DELETE</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_add_contact">Add Contacts</string>
 </resources>
