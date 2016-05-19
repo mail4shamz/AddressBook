@@ -85,6 +85,6 @@ public ArrayList<HashMap<String,String>>getAllContacts(){
     }
     return contactArrayList;
 }
-
+public
 
 }
