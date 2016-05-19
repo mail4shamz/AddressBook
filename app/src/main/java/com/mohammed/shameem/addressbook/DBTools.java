@@ -85,6 +85,25 @@ public ArrayList<HashMap<String,String>>getAllContacts(){
     }
     return contactArrayList;
 }
-public
+    public HashMap<String,String>getContactInformation(String ID){
+        HashMap<String,String>contactHashMap=new HashMap<>();
+        String SELECT_QUERY="SELECT * FROM CONTACT WHERE CONTACT_ID='"+ID+"'";
+        SQLiteDatabase database=this.getReadableDatabase();
+        ContentValues updateValues =new ContentValues();
+        Cursor cursor=database.rawQuery(SELECT_QUERY,null);
+        if(cursor.moveToFirst()){
+            do{
+
+                contactHashMap.put("CONTACT_ID",cursor.getString(0));
+                contactHashMap.put("FIRST_NAME",cursor.getString(1));
+                contactHashMap.put("LAST_NAME",cursor.getString(2));
+                contactHashMap.put("PHONE_NUMBER",cursor.getString(3));
+                contactHashMap.put("EMAIL_ADDRESS",cursor.getString(4));
+
+            }while (cursor.moveToNext());
+        }
+        return contactHashMap;
+    }
+
 
 }
