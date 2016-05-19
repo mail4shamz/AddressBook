@@ -1,14 +1,17 @@
 package com.mohammed.shameem.addressbook;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+Intent mainActivityIntent;
+TextView tvContactsId;
+DBTools dbToolsObject=new DBTools(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,4 +29,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Called when a view has been clicked.
+     *
+     * @param v The view that was clicked.
+     */
+    @Override
+    public void onClick(View v) {
+
+    }
 }
