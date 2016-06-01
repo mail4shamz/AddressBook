@@ -36,6 +36,6 @@ DBTools dbToolsObject=new DBTools(this);
      */
     @Override
     public void onClick(View v) {
-//Just checking that are ok now
+//Just checking
     }
 }
