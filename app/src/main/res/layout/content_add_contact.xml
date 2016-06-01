@@ -16,41 +16,51 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginRight="@dimen/padding_5dp"
-            android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/add_contact_title"
+            android:layout_column="0"
+            android:layout_marginRight="@dimen/padding_5dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_column="0" />
+            android:text="@string/add_contact_title"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
     </TableRow>
 
-
-        <TableRow
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_launcher"/>
+    </TableRow>
+    <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginRight="@dimen/padding_5dp"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_column="0"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:text="@string/first_name"
-            android:id="@+id/textView"
-            android:layout_column="0" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
+            android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Name"
-            android:ems="10"
+            android:layout_column="2"
             android:layout_weight="1"
-            android:id="@+id/etFirstName"
-            android:layout_column="2">
-            <requestFocus/>
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName">
+
+            <requestFocus />
         </EditText>
 
     </TableRow>
@@ -60,22 +70,22 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginRight="@dimen/padding_5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_column="0"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:text="@string/last_name"
-            android:layout_column="0" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Name"
-            android:ems="10"
-            android:layout_weight="1"
             android:id="@+id/etLastName"
-            android:layout_column="2" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="2"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName" />
     </TableRow>
 
     <TableRow
@@ -84,22 +94,22 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginRight="@dimen/padding_5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_column="0"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:text="@string/phone_number"
-            android:layout_column="0" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
+            android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:hint="Phome"
-            android:ems="10"
+            android:layout_column="2"
             android:layout_weight="1"
-            android:id="@+id/etPhoneNumber"
-            android:layout_column="2" />
+            android:ems="10"
+            android:hint="Phome"
+            android:inputType="phone" />
     </TableRow>
 
     <TableRow
@@ -107,22 +117,22 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:layout_marginRight="@dimen/padding_5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_column="0"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:text="@string/email_address"
-            android:layout_column="0" />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="Email"
-            android:ems="10"
+            android:layout_column="2"
             android:layout_weight="1"
-            android:id="@+id/etEmail"
-            android:layout_column="2" />
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
     </TableRow>
 
     <TableRow
@@ -136,10 +146,10 @@
         android:layout_height="match_parent">
 
         <Button
-            android:text="@string/add_contacts_button"
-            android:background="#F5F5DC"
             android:id="@+id/button"
-            android:layout_weight="1"            />
+            android:layout_weight="1"
+            android:background="#F5F5DC"
+            android:text="@string/add_contacts_button" />
     </TableRow>
 
 
