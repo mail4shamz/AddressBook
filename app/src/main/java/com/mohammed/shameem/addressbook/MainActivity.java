@@ -31,7 +31,7 @@ DBTools dbToolsObject=new DBTools(this);
     }
 
     /**
-     * Called when a view has been clicked.
+     * Called when a view has  clicked.
      *
      * @param v The view that was clicked.
      */
