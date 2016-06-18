@@ -1,4 +1,4 @@
-package com.mohammed.shameem.addressbook;
+package com.mohammed.shameem.addressbook.controller;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -68,7 +68,7 @@ public class DBTools extends SQLiteOpenHelper {
 
 public ArrayList<HashMap<String,String>>getAllContacts(){
     ArrayList<HashMap<String,String>>contactArrayList=new ArrayList<>();
-    String SELECT_ALL_CONTACT_QUERY="SELECT * FROM CONTACT";
+    String SELECT_ALL_CONTACT_QUERY="SELECT * FROM CONTACT ORDER BY LAST_NAME";
     SQLiteDatabase database=this.getWritableDatabase();
     ContentValues updateValues =new ContentValues();
     Cursor cursor=database.rawQuery(SELECT_ALL_CONTACT_QUERY,null);

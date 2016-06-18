@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".view.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,15 +19,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AddContact"
+            android:name=".view.AddContact"
             android:label="@string/title_activity_add_contact"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".EditContact"
+            android:name=".view.EditContact"
             android:label="@string/title_activity_edit_contact"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
