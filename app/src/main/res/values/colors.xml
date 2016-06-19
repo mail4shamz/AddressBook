@@ -9,6 +9,7 @@
     <color name="colorSecondaryText">#727272</color>
     <color name="colorIcons">#FFFFFF</color>
     <color name="colorDivider">#B6B6B6</color>
+    <color name="contactEntriesTextColor">#480607</color>
 
     <!--Add contactTextColor-->
     <color name="addContactTextColor">#800020</color>
