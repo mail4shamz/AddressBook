@@ -151,7 +151,7 @@
 
         <Button
             android:text="@string/edit_contacts_button"
-            android:background="@drawable/addbutton_bg"
+            android:background="@drawable/button_bg"
             android:id="@+id/btEditContacts"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"
             android:text="@string/delete_contacts_button"
-            android:background="@drawable/addbutton_bg"
+            android:background="@drawable/button_bg"
             android:id="@+id/btDeleteContact"
             android:layout_weight="1"            />
 

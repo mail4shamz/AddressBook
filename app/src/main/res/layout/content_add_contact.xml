@@ -161,7 +161,7 @@
         <Button
             android:id="@+id/button"
             android:layout_weight="1"
-            android:background="@drawable/addbutton_bg"
+            android:background="@drawable/button_bg"
             android:gravity="center"
             android:text="@string/add_contacts_button" />
     </TableRow>

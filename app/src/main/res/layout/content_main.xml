@@ -37,10 +37,10 @@
             <Button
                 android:id="@+id/btAddContact"
                 android:layout_height="60dp"
-                android:textStyle="bold|italic"
                 android:layout_gravity="center_vertical"
-                android:background="@drawable/addbutton_bg"
-                android:text="@string/add_contacts_button" />
+                android:background="@drawable/button_bg"
+                android:text="@string/add_contacts_button"
+                android:textStyle="bold|italic" />
         </TableRow>
     </TableLayout>
 
@@ -51,12 +51,12 @@
         android:gravity="top">
 
         <android.support.v7.widget.RecyclerView
-            android:background="#F5F5DC"
             android:id="@+id/card_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="#F5F5DC"
             android:gravity="center"
             android:scrollbars="vertical" />
 

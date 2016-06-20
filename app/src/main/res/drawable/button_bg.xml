@@ -5,4 +5,4 @@
     <stroke android:width="2px" android:color="@color/colorPrimaryText" />
     <solid android:color="#F5F5DC"/>
     <corners android:radius="5dp"/>
-</shape><?xml version="1.0" encoding="utf-8"?>
+</shape>
