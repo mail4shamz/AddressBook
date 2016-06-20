@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="60dp"
                 android:layout_column="2"
-                android:layout_gravity="center_vertical"
+                android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_marginLeft="@dimen/padding_5dp"
                 android:layout_marginRight="@dimen/padding_5dp"
                 android:layout_weight="1"
@@ -34,13 +34,13 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textStyle="bold|italic" />
 
-            <Button
+            <!--<Button
                 android:id="@+id/btAddContact"
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical"
                 android:background="@drawable/button_bg"
                 android:text="@string/add_contacts_button"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold|italic" />-->
         </TableRow>
     </TableLayout>
 
@@ -56,6 +56,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            tools:listitem="@layout/contact_entries"
             android:background="#F5F5DC"
             android:gravity="center"
             android:scrollbars="vertical" />

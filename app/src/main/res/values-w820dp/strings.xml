@@ -3,4 +3,5 @@
     <string name="contact_entries_first_name">First Name</string>
     <string name="contact_entries_ast_name">Last Name</string>
     <string name="switch_set_flash_text">Set Flash</string>
+    <string name="setflashtext">flash</string>
 </resources>

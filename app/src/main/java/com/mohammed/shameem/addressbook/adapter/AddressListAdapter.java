@@ -1,10 +1,13 @@
 package com.mohammed.shameem.addressbook.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
@@ -35,6 +38,8 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     @Override
     public void onBindViewHolder(AddressListViewHolder holder, int position) {
+        // I am converting the Integer type to String Type to give a correct String resource Id
+        holder.tvContactsId.setText(Integer.toString(singleAddressDetailHolders.get(position).getCONTACT_ID()));
 
     }
 
@@ -44,8 +49,17 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     }
 
     public class AddressListViewHolder extends RecyclerView.ViewHolder {
+        CardView cvContainerView;
+        TextView tvContactsId,tvLastName,tvFirstName;
+        Switch switchFlashOnOff;
         public AddressListViewHolder(View itemView) {
             super(itemView);
+            cvContainerView= (CardView) itemView.findViewById(R.id.cvContainerView);
+            tvContactsId= (TextView) itemView.findViewById(R.id.tvContactsId);
+            tvLastName= (TextView) itemView.findViewById(R.id.tvLastName);
+            tvFirstName= (TextView) itemView.findViewById(R.id.tvFirstName);
+            switchFlashOnOff= (Switch) itemView.findViewById(R.id.switchFlashOnOff);
+
         }
     }
 }
