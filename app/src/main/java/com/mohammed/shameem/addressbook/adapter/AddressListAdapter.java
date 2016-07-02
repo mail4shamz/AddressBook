@@ -41,7 +41,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     @Override
     public void onBindViewHolder(AddressListViewHolder holder, int position) {
         // I am converting the Integer type to String Type to give a correct String resource Id
-        holder.tvContactsId.setText(Integer.toString(singleAddressDetailHolders.get(position).getCONTACT_ID()));
+        holder.tvContactsId.setText(String.valueOf(singleAddressDetailHolders.get(position).getCONTACT_ID()));
         if (holder.switchFlashOnOff != null) {
             holder.switchFlashOnOff.setOnCheckedChangeListener(this);
         }
