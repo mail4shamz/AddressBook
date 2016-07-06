@@ -9,25 +9,28 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mohammed.shameem.addressbook.R;
+import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by shameem on 6/19/2016.
  */
 public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements CompoundButton.OnCheckedChangeListener {
     Context context;
-    ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders;
+    List<SingleAddressDetailHolder> singleAddressDetailHolders;
+    DBTools dbTools = new DBTools(context);
     LayoutInflater inflater;
 
     public AddressListAdapter(Context context, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders) {
         this.context = context;
         this.singleAddressDetailHolders = singleAddressDetailHolders;
         inflater = LayoutInflater.from(this.context);
+
     }
 
 
@@ -41,17 +44,22 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     @Override
     public void onBindViewHolder(AddressListViewHolder holder, int position) {
         // I am converting the Integer type to String Type to give a correct String resource Id
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("Mohammed Shameem");
+        strings.add("Mohammed Shameem");
+        strings.add("Mohammed Shameem");
         holder.tvContactsId.setText(String.valueOf(singleAddressDetailHolders.get(position).getCONTACT_ID()));
         if (holder.switchFlashOnOff != null) {
             holder.switchFlashOnOff.setOnCheckedChangeListener(this);
         }
     }
+
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked){
+        if (isChecked) {
             // Set the flash on
-
-        }else {
+         //dbTools.insertContact();
+        } else {
             // Set the flash off
         }
     }
@@ -65,6 +73,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         CardView cvContainerView;
         TextView tvContactsId, tvLastName, tvFirstName;
         Switch switchFlashOnOff;
+
         public AddressListViewHolder(View itemView) {
             super(itemView);
             cvContainerView = (CardView) itemView.findViewById(R.id.cvContainerView);

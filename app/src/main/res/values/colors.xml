@@ -14,5 +14,6 @@
     <!--Add contactTextColor-->
     <color name="addContactTextColor">#800020</color>
     <color name="button_bg">#F5F5DC</color>
+    <color name="contact_list_color">#F5F5DC</color>
 
 </resources>

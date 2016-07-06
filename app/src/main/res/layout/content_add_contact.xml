@@ -18,14 +18,14 @@
         android:layout_margin="@dimen/padding_10dp">
 
         <TextView
-            android:textStyle="bold|italic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_column="0"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/add_contact_title"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold|italic" />
 
     </TableRow>
 
@@ -59,10 +59,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:layout_marginRight="@dimen/padding_5dp"
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Name"
@@ -86,10 +86,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:layout_marginRight="@dimen/padding_5dp"
             android:id="@+id/etLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Name"
@@ -113,9 +113,9 @@
             android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:layout_marginRight="@dimen/padding_5dp"
             android:hint="Phome"
             android:inputType="phone" />
     </TableRow>
@@ -134,10 +134,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:layout_marginRight="@dimen/padding_5dp"
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Email"
@@ -152,14 +152,16 @@
     </TableRow>
 
     <TableRow
-        android:layout_marginRight="@dimen/padding_5dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
+        android:layout_marginRight="@dimen/padding_5dp"
         android:gravity="center">
 
         <Button
             android:id="@+id/button"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginRight="@dimen/margin_5dp"
             android:layout_weight="1"
             android:background="@drawable/button_bg"
             android:gravity="center"

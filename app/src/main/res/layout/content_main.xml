@@ -48,7 +48,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="#F5F5DC"
+            android:background="@color/contact_list_color"
             android:gravity="center"
             android:scrollbars="vertical"
             tools:listitem="@layout/contact_entries" />
