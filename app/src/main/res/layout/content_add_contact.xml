@@ -36,11 +36,18 @@
         android:layout_marginBottom="@dimen/padding_5dp"
         android:gravity="center">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_launcher" />
+        <LinearLayout
+            android:id="@+id/profilePicLinearLayout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/profilePicImageView"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
     </TableRow>
 
 
@@ -65,8 +72,8 @@
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName">
+            android:inputType="textPersonName"
+            android:singleLine="true">
 
             <requestFocus />
         </EditText>
@@ -92,8 +99,9 @@
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Name"
-            android:inputType="textPersonName" />
+
+            android:inputType="textPersonName"
+            android:singleLine="true" />
     </TableRow>
 
     <TableRow
@@ -116,8 +124,8 @@
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Phome"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:singleLine="true" />
     </TableRow>
 
     <TableRow
@@ -134,14 +142,14 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/etEmail"
+            android:id="@+id/etEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:singleLine="true" />
     </TableRow>
 
 
@@ -159,7 +167,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonAddContact"
             android:layout_marginLeft="@dimen/margin_5dp"
             android:layout_marginRight="@dimen/margin_5dp"
             android:layout_weight="1"
