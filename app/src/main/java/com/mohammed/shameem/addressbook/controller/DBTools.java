@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
+import com.mohammed.shameem.addressbook.constants.Constants.*;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -17,14 +20,14 @@ public class DBTools extends SQLiteOpenHelper {
         super(applicationContext, "addressbook.db", null, 1);
     }
 
-    String CREATE_CONTACT_TABLE_QUERY = "CREATE TABLE CONTACT(" +
-            "CONTACT_ID INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "FIRST_NAME TEXT, " +
-            "LAST_NAME TEXT, " +
-            "PHONE_NUMBER TEXT, " +
-            "EMAIL_ADDRESS TEXT, " +
-            "FLASH_SWITCH TEXT)";
-    String DROP_CONTACT_TABLE_QUERY = "DROP TABLE IF EXISTS CONTACT";
+    String CREATE_CONTACT_TABLE_QUERY = "CREATE TABLE " + ContactDetails.CONTACT + "(" +
+            ContactDetails.CONTACT_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+            ContactDetails.FIRST_NAME + " TEXT, " +
+            ContactDetails.LAST_NAME + " TEXT, " +
+            ContactDetails.PHONE_NUMBER + " TEXT, " +
+            ContactDetails.EMAIL_ADDRESS + " TEXT, " +
+            ContactDetails.FLASH_SWITCH + " TEXT)";
+    String DROP_CONTACT_TABLE_QUERY = "DROP TABLE IF EXISTS " + ContactDetails.CONTACT;
 
     @Override
     public void onCreate(SQLiteDatabase database) {
@@ -36,21 +39,22 @@ public class DBTools extends SQLiteOpenHelper {
         database.execSQL(DROP_CONTACT_TABLE_QUERY);
         onCreate(database);
     }
+
     //==============================================================================================================//
-   //=============================================================================================================//
+    //=============================================================================================================//
     // The data type of the data accepted into this method is HashMap<String,String> with both key and value as Strings
     public void insertContact(HashMap<String, String> queryValues) {
         // "this" Here refers to SQLiteOpenHelper class
         // that is the class that is extended primaryly
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues insertValues = new ContentValues();
-        insertValues.put("FIRST_NAME", queryValues.get("FIRST_NAME"));
-        insertValues.put("LAST_NAME", queryValues.get("LAST_NAME"));
-        insertValues.put("PHONE_NUMBER", queryValues.get("PHONE_NUMBER"));
-        insertValues.put("EMAIL_ADDRESS", queryValues.get("EMAIL_ADDRESS"));
+        insertValues.put(ContactDetails.FIRST_NAME, queryValues.get(ContactDetails.FIRST_NAME));
+        insertValues.put(ContactDetails.LAST_NAME, queryValues.get(ContactDetails.LAST_NAME));
+        insertValues.put(ContactDetails.PHONE_NUMBER, queryValues.get(ContactDetails.PHONE_NUMBER));
+        insertValues.put(ContactDetails.EMAIL_ADDRESS, queryValues.get(ContactDetails.EMAIL_ADDRESS));
         //Newly Added field
-        insertValues.put("FLASH_SWITCH", queryValues.get("FLASH_SWITCH"));
-        database.insert("CONTACT", null, insertValues);
+        insertValues.put(ContactDetails.FLASH_SWITCH, queryValues.get(ContactDetails.FLASH_SWITCH));
+        database.insert(ContactDetails.CONTACT, null, insertValues);
         database.releaseReference();
     }
 
@@ -60,12 +64,12 @@ public class DBTools extends SQLiteOpenHelper {
         // that is the class that is extended primaryly
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues updateValues = new ContentValues();
-        updateValues.put("FIRST_NAME", queryValues.get("FIRST_NAME"));
-        updateValues.put("LAST_NAME", queryValues.get("LAST_NAME"));
-        updateValues.put("PHONE_NUMBER", queryValues.get("PHONE_NUMBER"));
-        updateValues.put("EMAIL_ADDRESS", queryValues.get("EMAIL_ADDRESS"));
-        updateValues.put("FLASH_SWITCH", queryValues.get("FLASH_SWITCH"));
-        return database.update("CONTACT", updateValues, "CONTACT_ID" + "=?", new String[]{queryValues.get("CONTACT_ID")});
+        updateValues.put(ContactDetails.FIRST_NAME, queryValues.get(ContactDetails.FIRST_NAME));
+        updateValues.put(ContactDetails.LAST_NAME, queryValues.get(ContactDetails.LAST_NAME));
+        updateValues.put(ContactDetails.PHONE_NUMBER, queryValues.get(ContactDetails.PHONE_NUMBER));
+        updateValues.put(ContactDetails.EMAIL_ADDRESS, queryValues.get(ContactDetails.EMAIL_ADDRESS));
+        updateValues.put(ContactDetails.FLASH_SWITCH, queryValues.get(ContactDetails.FLASH_SWITCH));
+        return database.update(ContactDetails.CONTACT, updateValues, ContactDetails.CONTACT_ID + "=?", new String[]{queryValues.get(ContactDetails.CONTACT_ID)});
 
     }
 
@@ -74,7 +78,7 @@ public class DBTools extends SQLiteOpenHelper {
         // "this" Here refers to SQLiteOpenHelper class
         // that is the class that is extended primaryly
         SQLiteDatabase database = this.getWritableDatabase();
-        String DELETE_QUERY = "DELETE FROM CONTACT WHERE CONTACT_ID='" + CCNTACT_ID + "'";
+        String DELETE_QUERY = "DELETE FROM "+ContactDetails.CONTACT+" WHERE "+ContactDetails.CONTACT_ID+"='" + CCNTACT_ID + "'";
         database.execSQL(DELETE_QUERY);
     }
 
