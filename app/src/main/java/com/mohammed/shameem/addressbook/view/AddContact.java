@@ -17,6 +17,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.mohammed.shameem.addressbook.R;
+
+
+import com.mohammed.shameem.addressbook.constants.Constants.*;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.utils_classes.UtilValidate;
 
@@ -82,11 +85,11 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v.getId() == R.id.buttonAddContact) {
             if (validateInputData()) {
-                datagStringHashMap.put("FIRST_NAME", etFirstName.getText().toString().trim());
-                datagStringHashMap.put("LAST_NAME", etLastName.getText().toString().trim());
-                datagStringHashMap.put("PHONE_NUMBER", etPhoneNumber.getText().toString().trim());
-                datagStringHashMap.put("EMAIL_ADDRESS", etEmailAddress.getText().toString().trim());
-                datagStringHashMap.put("FLASH_SWITCH", Flash);
+                datagStringHashMap.put(ContactDetails.FIRST_NAME, etFirstName.getText().toString().trim());
+                datagStringHashMap.put(ContactDetails.LAST_NAME, etLastName.getText().toString().trim());
+                datagStringHashMap.put(ContactDetails.PHONE_NUMBER, etPhoneNumber.getText().toString().trim());
+                datagStringHashMap.put(ContactDetails.EMAIL_ADDRESS, etEmailAddress.getText().toString().trim());
+                datagStringHashMap.put(ContactDetails.FLASH_SWITCH, Flash);
                 dbTools.insertContact(datagStringHashMap);
             }
         }

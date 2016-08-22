@@ -17,7 +17,7 @@ import java.util.HashMap;
  */
 public class DBTools extends SQLiteOpenHelper {
     public DBTools(Context applicationContext) {
-        super(applicationContext, "addressbook.db", null, 1);
+        super(applicationContext,DataBaseDetails.DATABASE_MAME, null, DataBaseDetails.DATABASE_VERSION);
     }
 
     String CREATE_CONTACT_TABLE_QUERY = "CREATE TABLE " + ContactDetails.CONTACT + "(" +
@@ -84,20 +84,20 @@ public class DBTools extends SQLiteOpenHelper {
 
     public ArrayList<HashMap<String, String>> getAllContacts() {
         ArrayList<HashMap<String, String>> contactArrayList = new ArrayList<>();
-        String SELECT_ALL_CONTACT_QUERY = "SELECT * FROM CONTACT ORDER BY LAST_NAME";
+        String SELECT_ALL_CONTACT_QUERY = "SELECT * FROM "+ContactDetails.CONTACT +" ORDER BY "+ContactDetails.LAST_NAME;
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues updateValues = new ContentValues();
         Cursor cursor = database.rawQuery(SELECT_ALL_CONTACT_QUERY, null);
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> contactMap = new HashMap<>();
-                contactMap.put("CONTACT_ID", cursor.getString(0));
-                contactMap.put("FIRST_NAME", cursor.getString(1));
-                contactMap.put("LAST_NAME", cursor.getString(2));
-                contactMap.put("PHONE_NUMBER", cursor.getString(3));
-                contactMap.put("EMAIL_ADDRESS", cursor.getString(4));
+                contactMap.put(ContactDetails.CONTACT_ID, cursor.getString(0));
+                contactMap.put(ContactDetails.FIRST_NAME, cursor.getString(1));
+                contactMap.put(ContactDetails.LAST_NAME, cursor.getString(2));
+                contactMap.put(ContactDetails.PHONE_NUMBER, cursor.getString(3));
+                contactMap.put(ContactDetails.EMAIL_ADDRESS, cursor.getString(4));
                 //Newly Added field
-                contactMap.put("FLASH_SWITCH", cursor.getString(5));
+                contactMap.put(ContactDetails.FLASH_SWITCH, cursor.getString(5));
                 contactArrayList.add(contactMap);
             } while (cursor.moveToNext());
         }
@@ -106,20 +106,20 @@ public class DBTools extends SQLiteOpenHelper {
 
     public HashMap<String, String> getContactInformation(String ID) {
         HashMap<String, String> contactHashMap = new HashMap<>();
-        String SELECT_QUERY = "SELECT * FROM CONTACT WHERE CONTACT_ID='" + ID + "'";
+        String SELECT_QUERY = "SELECT * FROM "+ContactDetails.CONTACT+" WHERE "+ContactDetails.CONTACT_ID+"='" + ID + "'";
         SQLiteDatabase database = this.getReadableDatabase();
         ContentValues updateValues = new ContentValues();
         Cursor cursor = database.rawQuery(SELECT_QUERY, null);
         if (cursor.moveToFirst()) {
             do {
 
-                contactHashMap.put("CONTACT_ID", cursor.getString(0));
-                contactHashMap.put("FIRST_NAME", cursor.getString(1));
-                contactHashMap.put("LAST_NAME", cursor.getString(2));
-                contactHashMap.put("PHONE_NUMBER", cursor.getString(3));
-                contactHashMap.put("EMAIL_ADDRESS", cursor.getString(4));
+                contactHashMap.put(ContactDetails.CONTACT_ID, cursor.getString(0));
+                contactHashMap.put(ContactDetails.FIRST_NAME, cursor.getString(1));
+                contactHashMap.put(ContactDetails.LAST_NAME, cursor.getString(2));
+                contactHashMap.put(ContactDetails.PHONE_NUMBER, cursor.getString(3));
+                contactHashMap.put(ContactDetails.EMAIL_ADDRESS, cursor.getString(4));
                 //Newly Added field
-                contactHashMap.put("FLASH_SWITCH", cursor.getString(5));
+                contactHashMap.put(ContactDetails.FLASH_SWITCH, cursor.getString(5));
             } while (cursor.moveToNext());
         }
         return contactHashMap;
