@@ -1,8 +1,6 @@
 package com.mohammed.shameem.addressbook.constants;
 
-/**
- * Created by vivek on 22/8/16.
- */
+
 public interface Constants {
     interface ContactDetails {
         String CONTACT="CONTACT";
