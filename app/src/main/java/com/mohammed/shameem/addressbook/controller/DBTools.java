@@ -11,13 +11,11 @@ import com.mohammed.shameem.addressbook.constants.Constants.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
-/**
- * Created by shameem on 5/18/2016.
- */
 public class DBTools extends SQLiteOpenHelper {
     public DBTools(Context applicationContext) {
-        super(applicationContext,DataBaseDetails.DATABASE_MAME, null, DataBaseDetails.DATABASE_VERSION);
+        super(applicationContext, DataBaseDetails.DATABASE_MAME, null, DataBaseDetails.DATABASE_VERSION);
     }
 
     String CREATE_CONTACT_TABLE_QUERY = "CREATE TABLE " + ContactDetails.CONTACT + "(" +
@@ -43,7 +41,7 @@ public class DBTools extends SQLiteOpenHelper {
     //==============================================================================================================//
     //=============================================================================================================//
     // The data type of the data accepted into this method is HashMap<String,String> with both key and value as Strings
-    public void insertContact(HashMap<String, String> queryValues) {
+    public void insertContact(Map<String, String> queryValues) {
         // "this" Here refers to SQLiteOpenHelper class
         // that is the class that is extended primaryly
         SQLiteDatabase database = this.getWritableDatabase();
@@ -59,7 +57,7 @@ public class DBTools extends SQLiteOpenHelper {
     }
 
     // The data type of the data accepted into this method is HashMap<String,String> with both key and value as Strings
-    public int updateContact(HashMap<String, String> queryValues) {
+    public int updateContact(Map<String, String> queryValues) {
         // "this" Here refers to SQLiteOpenHelper class
         // that is the class that is extended primaryly
         SQLiteDatabase database = this.getWritableDatabase();
@@ -74,17 +72,17 @@ public class DBTools extends SQLiteOpenHelper {
     }
 
     // The data type of the data accepted into this method is String
-    public void deleteContact(String CCNTACT_ID) {
+    public void deleteContact(String CONTACT_ID) {
         // "this" Here refers to SQLiteOpenHelper class
-        // that is the class that is extended primaryly
+        // that is the class that is extended primarily
         SQLiteDatabase database = this.getWritableDatabase();
-        String DELETE_QUERY = "DELETE FROM "+ContactDetails.CONTACT+" WHERE "+ContactDetails.CONTACT_ID+"='" + CCNTACT_ID + "'";
+        String DELETE_QUERY = "DELETE FROM " + ContactDetails.CONTACT + " WHERE " + ContactDetails.CONTACT_ID + "='" + CONTACT_ID + "'";
         database.execSQL(DELETE_QUERY);
     }
 
     public ArrayList<HashMap<String, String>> getAllContacts() {
         ArrayList<HashMap<String, String>> contactArrayList = new ArrayList<>();
-        String SELECT_ALL_CONTACT_QUERY = "SELECT * FROM "+ContactDetails.CONTACT +" ORDER BY "+ContactDetails.LAST_NAME;
+        String SELECT_ALL_CONTACT_QUERY = "SELECT * FROM " + ContactDetails.CONTACT + " ORDER BY " + ContactDetails.LAST_NAME;
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues updateValues = new ContentValues();
         Cursor cursor = database.rawQuery(SELECT_ALL_CONTACT_QUERY, null);
@@ -104,9 +102,9 @@ public class DBTools extends SQLiteOpenHelper {
         return contactArrayList;
     }
 
-    public HashMap<String, String> getContactInformation(String ID) {
+    public HashMap<String, String> getContactInformation(String CONTACT_ID) {
         HashMap<String, String> contactHashMap = new HashMap<>();
-        String SELECT_QUERY = "SELECT * FROM "+ContactDetails.CONTACT+" WHERE "+ContactDetails.CONTACT_ID+"='" + ID + "'";
+        String SELECT_QUERY = "SELECT * FROM " + ContactDetails.CONTACT + " WHERE " + ContactDetails.CONTACT_ID + "='" + CONTACT_ID + "'";
         SQLiteDatabase database = this.getReadableDatabase();
         ContentValues updateValues = new ContentValues();
         Cursor cursor = database.rawQuery(SELECT_QUERY, null);

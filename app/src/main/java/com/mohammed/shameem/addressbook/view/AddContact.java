@@ -1,11 +1,9 @@
 package com.mohammed.shameem.addressbook.view;
 
-import android.content.Context;
-import android.database.Cursor;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,15 +13,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.mohammed.shameem.addressbook.R;
-
-
-import com.mohammed.shameem.addressbook.constants.Constants.*;
+import com.mohammed.shameem.addressbook.constants.Constants.ContactDetails;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.utils_classes.UtilValidate;
-
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class AddContact extends AppCompatActivity implements View.OnClickListener {
     private Toast customToast;
@@ -35,7 +31,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     private EditText etEmailAddress;
     private Button buttonAddContact;
     private DBTools dbTools;
-    private HashMap<String, String> datagStringHashMap;
+    private Map<String, String> dataStringHashMap;
     private static String Flash = "1";
 
     @Override
@@ -58,6 +54,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
         etEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
         buttonAddContact = (Button) findViewById(R.id.buttonAddContact);
+        dataStringHashMap=new HashMap<>();
         buttonAddContact.setOnClickListener(this);
         dbTools = new DBTools(AddContact.this);
 
@@ -85,12 +82,13 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         if (v.getId() == R.id.buttonAddContact) {
             if (validateInputData()) {
-                datagStringHashMap.put(ContactDetails.FIRST_NAME, etFirstName.getText().toString().trim());
-                datagStringHashMap.put(ContactDetails.LAST_NAME, etLastName.getText().toString().trim());
-                datagStringHashMap.put(ContactDetails.PHONE_NUMBER, etPhoneNumber.getText().toString().trim());
-                datagStringHashMap.put(ContactDetails.EMAIL_ADDRESS, etEmailAddress.getText().toString().trim());
-                datagStringHashMap.put(ContactDetails.FLASH_SWITCH, Flash);
-                dbTools.insertContact(datagStringHashMap);
+                dataStringHashMap.put(ContactDetails.FIRST_NAME, etFirstName.getText().toString().trim());
+                dataStringHashMap.put(ContactDetails.LAST_NAME, etLastName.getText().toString().trim());
+                dataStringHashMap.put(ContactDetails.PHONE_NUMBER, etPhoneNumber.getText().toString().trim());
+                dataStringHashMap.put(ContactDetails.EMAIL_ADDRESS, etEmailAddress.getText().toString().trim());
+                dataStringHashMap.put(ContactDetails.FLASH_SWITCH, Flash);
+                dbTools.insertContact(dataStringHashMap);
+                startActivity(new Intent(AddContact.this,MainActivity.class));
             }
         }
     }
@@ -118,6 +116,9 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
             customToast = Toast.makeText(AddContact.this, "Enter email address", Toast.LENGTH_SHORT);
             customToast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 100, 760);
             customToast.show();
+            return false;
+        }
+        else {
 
             if (!UtilValidate.isValidEmail(etEmailAddress.getText().toString())) {
                 customToast = Toast.makeText(AddContact.this, "Enter valid email address", Toast.LENGTH_SHORT);
@@ -125,7 +126,6 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
                 customToast.show();
                 return false;
             }
-            return false;
         }
         return true;
     }
