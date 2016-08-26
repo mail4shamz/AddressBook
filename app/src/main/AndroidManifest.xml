@@ -23,9 +23,13 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.default_searchable"
+                android:value=".view.MainActivity"/>
             <meta-data android:name="android.app.contact_search"
                 android:resource="@xml/contact_search"/>
         </activity>
