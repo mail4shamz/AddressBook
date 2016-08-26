@@ -1,5 +1,6 @@
 package com.mohammed.shameem.addressbook.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -21,22 +22,23 @@ import java.util.List;
  * Created by shameem on 6/19/2016.
  */
 public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements CompoundButton.OnCheckedChangeListener {
-    Context context;
+    private Activity activity;
+    private View cardView;
     List<SingleAddressDetailHolder> singleAddressDetailHolders;
-    DBTools dbTools = new DBTools(context);
+    DBTools dbTools = new DBTools(activity);
     LayoutInflater inflater;
 
-    public AddressListAdapter(Context context, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders) {
-        this.context = context;
+    public AddressListAdapter(Activity activity/*, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders*/) {
+        this.activity = activity;
         this.singleAddressDetailHolders = singleAddressDetailHolders;
-        inflater = LayoutInflater.from(this.context);
+        inflater = LayoutInflater.from(this.activity);
 
     }
 
 
     @Override
     public AddressListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View cardView = inflater.inflate(R.layout.contact_entries, parent, false);
+         cardView = inflater.inflate(R.layout.contact_entries, parent, false);
         AddressListViewHolder addressListViewHolder = new AddressListViewHolder(cardView);
         return addressListViewHolder;
     }
@@ -45,10 +47,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     public void onBindViewHolder(AddressListViewHolder holder, int position) {
         // I am converting the Integer type to String Type to give a correct String resource Id
         ArrayList<String> strings = new ArrayList<>();
-        strings.add("Mohammed Shameem");
-        strings.add("Mohammed Shameem");
-        strings.add("Mohammed Shameem");
-        holder.tvContactsId.setText(String.valueOf(singleAddressDetailHolders.get(position).getCONTACT_ID()));
+//        holder.tvContactsId.setText(String.valueOf(singleAddressDetailHolders.get(position).getCONTACT_ID()));
         if (holder.switchFlashOnOff != null) {
             holder.switchFlashOnOff.setOnCheckedChangeListener(this);
         }
@@ -66,7 +65,8 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     @Override
     public int getItemCount() {
-        return singleAddressDetailHolders.size();
+        return 50;
+        /*return singleAddressDetailHolders.size();*/
     }
 
     public class AddressListViewHolder extends RecyclerView.ViewHolder {
