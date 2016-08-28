@@ -47,8 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(this);
+        getSupportActionBar().setTitle(R.string.contacts_title);
         dbToolsObject = new DBTools(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
@@ -64,12 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.fab:
-                startActivity(new Intent(MainActivity.this, AddContact.class));
-                break;
-        }
-//Just checking
+
     }
 
     @Override
@@ -93,6 +87,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id==R.id.menu_addbutton){
+            startActivity(new Intent(MainActivity.this,AddContact.class));
+         return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
