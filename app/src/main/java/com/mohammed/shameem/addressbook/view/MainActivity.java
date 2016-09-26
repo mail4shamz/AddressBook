@@ -3,12 +3,12 @@ package com.mohammed.shameem.addressbook.view;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +18,10 @@ import android.widget.Toast;
 import com.mohammed.shameem.addressbook.adapter.AddressListAdapter;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.R;
+import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
     private Toolbar toolbar;
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     private LinearLayoutManager linearLayoutManager;
     private AddressListAdapter addressListAdapter;
+    ArrayList <SingleAddressDetailHolder> singleAddressDetailHolders=new ArrayList<>();
 
 
     @Override
@@ -50,10 +55,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle(R.string.contacts_title);
         dbToolsObject = new DBTools(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
+        adddIist();
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        addressListAdapter = new AddressListAdapter(MainActivity.this);
+        addressListAdapter = new AddressListAdapter(MainActivity.this, singleAddressDetailHolders);
         mRecyclerView.setAdapter(addressListAdapter);
+    }
+
+    private void adddIist() {
+
     }
 
     /**
@@ -102,6 +112,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        return false;
+        if ( TextUtils.isEmpty ( newText ) ) {
+            addressListAdapter.getFilter().filter("");
+            addressListAdapter.resetData();
+        } else {
+            addressListAdapter.getFilter().filter(newText.toString());
+        }
+        return true;
     }
 }
