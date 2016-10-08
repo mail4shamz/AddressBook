@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SearchView searchView= (SearchView) menu.findItem(R.id.menu_search).getActionView();
         SearchManager searchManager= (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -107,17 +108,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        return false;
+        MainActivity.this.addressListAdapter.getFilter().filter(query);
+        return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
+
         if ( TextUtils.isEmpty ( newText ) ) {
             addressListAdapter.getFilter().filter("");
             addressListAdapter.resetData();
         } else {
             addressListAdapter.getFilter().filter(newText.toString());
         }
-        return true;
+
+        //MainActivity.this.ArrayAdapter.getFilter().filter(s);
+        MainActivity.this.addressListAdapter.getFilter().filter(newText);
+return true;
     }
 }

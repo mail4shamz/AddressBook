@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "301825085374",
+    "firebase_url": "https://addressbook-51b91.firebaseio.com",
+    "project_id": "addressbook-51b91",
+    "storage_bucket": "addressbook-51b91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301825085374:android:0962fd13c49710a2",
+        "android_client_info": {
+          "package_name": "com.mohammed.shameem.addressbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301825085374-pj33lva6sfkd7efmrvsjlqetu3gr5sei.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mohammed.shameem.addressbook",
+            "certificate_hash": "F89C56A009B5A7F3AB26D169FDA9BF90187B0564"
+          }
+        },
+        {
+          "client_id": "301825085374-sjla0harriqunrjdrqp04pgeisinpo1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOv9HCzMaGh-jq6SyydI0e3gmtJKazGJE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301825085374-sjla0harriqunrjdrqp04pgeisinpo1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
