@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RecyclerView mRecyclerView;
     private LinearLayoutManager linearLayoutManager;
     private AddressListAdapter addressListAdapter;
-    ArrayList <SingleAddressDetailHolder> singleAddressDetailHolders=new ArrayList<>();
+    ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders = new ArrayList<>();
 
 
     @Override
@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
         mainActivityIntent = getIntent();
         if (Intent.ACTION_SEARCH.equalsIgnoreCase(mainActivityIntent.getAction())) {
-            searchQuery=mainActivityIntent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(MainActivity.this, "The searched Name is "+searchQuery, Toast.LENGTH_LONG).show();
+            searchQuery = mainActivityIntent.getStringExtra(SearchManager.QUERY);
+            Toast.makeText(MainActivity.this, "The searched Name is " + searchQuery, Toast.LENGTH_LONG).show();
         }
 
 
@@ -55,16 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle(R.string.contacts_title);
         dbToolsObject = new DBTools(this);
         mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
-        adddIist();
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         addressListAdapter = new AddressListAdapter(MainActivity.this, singleAddressDetailHolders);
         mRecyclerView.setAdapter(addressListAdapter);
     }
 
-    private void adddIist() {
 
-    }
 
     /**
      * Called when a view has  clicked.
@@ -81,8 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
         /*final MenuItem item = menu.findItem(R.id.menu_search);*/
-        SearchView searchView= (SearchView) menu.findItem(R.id.menu_search).getActionView();
-        SearchManager searchManager= (SearchManager) getSystemService(SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
+        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(this);
         return true;
@@ -98,9 +95,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_settings) {
             return true;
         }
-        if (id==R.id.menu_addbutton){
-            startActivity(new Intent(MainActivity.this,AddContact.class));
-         return true;
+        if (id == R.id.menu_addbutton) {
+            startActivity(new Intent(MainActivity.this, AddContact.class));
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -115,15 +112,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onQueryTextChange(String newText) {
 
-        if ( TextUtils.isEmpty ( newText ) ) {
+        if (TextUtils.isEmpty(newText)) {
             addressListAdapter.getFilter().filter("");
             addressListAdapter.resetData();
         } else {
             addressListAdapter.getFilter().filter(newText.toString());
         }
 
-        //MainActivity.this.ArrayAdapter.getFilter().filter(s);
         MainActivity.this.addressListAdapter.getFilter().filter(newText);
-return true;
+        return true;
     }
 }

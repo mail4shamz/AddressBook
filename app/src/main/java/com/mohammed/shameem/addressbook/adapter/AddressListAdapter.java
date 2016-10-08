@@ -14,7 +14,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.controller.DBTools;
@@ -130,7 +130,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     }
 
     public void resetData() {
-
+     this.newSingleAddressDetailHolders=this.originalSingleAddressDetailHolders;
     }
 
 
