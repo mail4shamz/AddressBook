@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by shameem on 6/19/2016.
  */
-public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements CompoundButton.OnCheckedChangeListener,Filterable {
+public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements CompoundButton.OnCheckedChangeListener, Filterable {
 
     private Activity activity;
     private View cardView;
@@ -73,12 +73,12 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     @Override
     public long getItemId(int position) {
-        return position;
+        return originalSingleAddressDetailHolders == null ? 0 : originalSingleAddressDetailHolders.get(position).hashCode();
     }
 
     @Override
     public int getItemCount() {
-        return originalSingleAddressDetailHolders.size();
+        return originalSingleAddressDetailHolders==null?0:originalSingleAddressDetailHolders.size();
     }
 
     /**
@@ -130,9 +130,8 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     }
 
     public void resetData() {
-     this.newSingleAddressDetailHolders=this.originalSingleAddressDetailHolders;
+        this.newSingleAddressDetailHolders = this.originalSingleAddressDetailHolders;
     }
-
 
 
     public class AddressListViewHolder extends RecyclerView.ViewHolder {
