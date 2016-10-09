@@ -51,106 +51,76 @@
     </TableRow>
 
 
-    <TableRow
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_5dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_marginRight="@dimen/padding_5dp"
-            android:text="@string/first_name"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="First Name"
             android:inputType="textPersonName"
-            android:singleLine="true">
+            android:maxLines="1">
 
             <requestFocus />
-        </EditText>
-    </TableRow>
+        </android.support.design.widget.TextInputEditText>
+    </android.support.design.widget.TextInputLayout>
 
-    <TableRow
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_5dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_marginRight="@dimen/padding_5dp"
-            android:text="@string/last_name"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/etLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-
+            android:hint="Last Name"
             android:inputType="textPersonName"
-            android:singleLine="true" />
-    </TableRow>
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
 
-    <TableRow
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_5dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_marginRight="@dimen/padding_5dp"
-            android:text="@string/phone_number"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/etPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
+            android:maxLength="20"
+            android:hint="Phone Number"
             android:inputType="phone"
-            android:singleLine="true" />
-    </TableRow>
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
 
-    <TableRow
+
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/padding_15dp">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="0"
-            android:layout_marginRight="@dimen/padding_5dp"
-            android:text="@string/email_address"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/etEmailAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
+            android:hint="Email Address"
             android:inputType="textEmailAddress"
-            android:singleLine="true" />
-    </TableRow>
+            android:maxLines="1" />
+    </android.support.design.widget.TextInputLayout>
 
 
     <TableRow
