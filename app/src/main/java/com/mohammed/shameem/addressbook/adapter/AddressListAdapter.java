@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
+import com.mohammed.shameem.addressbook.interfaces.ItemClickListner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +27,16 @@ import java.util.List;
 /**
  * Created by shameem on 6/19/2016.
  */
-public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements CompoundButton.OnCheckedChangeListener, Filterable {
+public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.AddressListViewHolder> implements Filterable {
 
     private Activity activity;
     private View cardView;
-    List<SingleAddressDetailHolder> originalSingleAddressDetailHolders;
-    List<SingleAddressDetailHolder> newSingleAddressDetailHolders;
-    DBTools dbTools = new DBTools(activity);
-    LayoutInflater inflater;
+    private List<SingleAddressDetailHolder> originalSingleAddressDetailHolders;
+    private List<SingleAddressDetailHolder> newSingleAddressDetailHolders;
+    private DBTools dbTools = new DBTools(activity);
+    private LayoutInflater inflater;
 
-    public AddressListAdapter(Activity activity, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders) {
+    public AddressListAdapter(Activity activity, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders, int ListItem) {
         this.activity = activity;
         this.originalSingleAddressDetailHolders = singleAddressDetailHolders;
         this.newSingleAddressDetailHolders = singleAddressDetailHolders;
@@ -43,6 +44,15 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
     }
 
+    @Override
+    public long getItemId(int position) {
+        return originalSingleAddressDetailHolders == null ? 0 : originalSingleAddressDetailHolders.get(position).hashCode();
+    }
+
+    @Override
+    public int getItemCount() {
+        return originalSingleAddressDetailHolders == null ? 0 : originalSingleAddressDetailHolders.size();
+    }
 
     @Override
     public AddressListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,32 +64,21 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     @Override
     public void onBindViewHolder(AddressListViewHolder holder, int position) {
         // I am converting the Integer type to String Type to give a correct String resource Id
-        ArrayList<String> strings = new ArrayList<>();
-//        holder.tvContactsId.setText(String.valueOf(singleAddressDetailHolders.get(position).getCONTACT_ID()));
+        holder.tvContactsId.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getCONTACT_ID()));
+        holder.tvFirstName.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getFIRST_NAME()));
+        holder.tvLastName.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getFIRST_NAME()));
         if (holder.switchFlashOnOff != null) {
-            holder.switchFlashOnOff.setOnCheckedChangeListener(this);
+            holder.switchFlashOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                }
+            });
         }
+
+
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked) {
-            // Set the flash on
-            //dbTools.insertContact();
-        } else {
-            // Set the flash off
-        }
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return originalSingleAddressDetailHolders == null ? 0 : originalSingleAddressDetailHolders.get(position).hashCode();
-    }
-
-    @Override
-    public int getItemCount() {
-        return originalSingleAddressDetailHolders==null?0:originalSingleAddressDetailHolders.size();
-    }
 
     /**
      * <p>Returns a filter that can be used to constrain data with a filtering
@@ -117,7 +116,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 if (results.count == 0) {
-                    notifyAll();
+                    notifyDataSetChanged();
                 } else {
                     newSingleAddressDetailHolders = (List<SingleAddressDetailHolder>) results.values;
                     notifyDataSetChanged();
@@ -134,7 +133,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     }
 
 
-    public class AddressListViewHolder extends RecyclerView.ViewHolder {
+
+    public class AddressListViewHolder extends RecyclerView.ViewHolder  {
+        ItemClickListner itemClickListner;
         CardView cvContainerView;
         TextView tvContactsId, tvLastName, tvFirstName;
         Switch switchFlashOnOff;
@@ -148,5 +149,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             switchFlashOnOff = (Switch) itemView.findViewById(R.id.switchFlashOnOff);
 
         }
+
     }
 }

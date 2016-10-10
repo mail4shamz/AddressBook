@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        addressListAdapter = new AddressListAdapter(MainActivity.this, singleAddressDetailHolders);
+        mRecyclerView.setOnClickListener(this);
+        addressListAdapter = new AddressListAdapter(MainActivity.this, singleAddressDetailHolders,R.layout.contact_entries);
         mRecyclerView.setAdapter(addressListAdapter);
     }
 
@@ -77,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_login, menu);
-        /*final MenuItem item = menu.findItem(R.id.menu_search);*/
         SearchView searchView = (SearchView) menu.findItem(R.id.menu_search).getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
