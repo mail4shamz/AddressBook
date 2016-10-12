@@ -9,13 +9,17 @@ public class SingleAddressDetailHolder {
     private String LAST_NAME;
     private String PHONE_NUMBER;
     private String EMAIL_ADDRESS;
+    private String FLASH_STATE;
 
-    public SingleAddressDetailHolder(int CONTACT_ID, String FIRST_NAME, String LAST_NAME, String PHONE_NUMBER, String EMAIL_ADDRESS) {
+    public SingleAddressDetailHolder(int CONTACT_ID, String FIRST_NAME, String LAST_NAME, String PHONE_NUMBER, String EMAIL_ADDRESS,
+                                     String FLASH_STATE) {
         this.CONTACT_ID = CONTACT_ID;
         this.FIRST_NAME = FIRST_NAME;
         this.LAST_NAME = LAST_NAME;
         this.PHONE_NUMBER = PHONE_NUMBER;
         this.EMAIL_ADDRESS = EMAIL_ADDRESS;
+        this.FLASH_STATE = FLASH_STATE;
+
     }
 
     public int getCONTACT_ID() {
@@ -59,4 +63,11 @@ public class SingleAddressDetailHolder {
     }
 
 
+    public String getFLASH_STATE() {
+        return FLASH_STATE;
+    }
+
+    public void setFLASH_STATE(String FLASH_STATE) {
+        this.FLASH_STATE = FLASH_STATE;
+    }
 }

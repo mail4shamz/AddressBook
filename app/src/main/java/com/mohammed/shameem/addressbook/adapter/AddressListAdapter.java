@@ -35,6 +35,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private List<SingleAddressDetailHolder> newSingleAddressDetailHolders;
     private DBTools dbTools = new DBTools(activity);
     private LayoutInflater inflater;
+    private Filter RedeemFilter;
 
     public AddressListAdapter(Activity activity, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders, int ListItem) {
         this.activity = activity;
@@ -66,11 +67,12 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         // I am converting the Integer type to String Type to give a correct String resource Id
         holder.tvContactsId.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getCONTACT_ID()));
         holder.tvFirstName.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getFIRST_NAME()));
-        holder.tvLastName.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getFIRST_NAME()));
+        holder.tvLastName.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getLAST_NAME()));
         if (holder.switchFlashOnOff != null) {
             holder.switchFlashOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
 
                 }
             });
@@ -91,7 +93,11 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
      */
     @Override
     public Filter getFilter() {
-        return new Filter() {
+        if (RedeemFilter == null)
+            RedeemFilter = new RedeemFilter(newSingleAddressDetailHolders, this);
+
+        return RedeemFilter;
+    /*    return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 FilterResults results = new FilterResults();
@@ -103,7 +109,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
                     List<SingleAddressDetailHolder> nRedeemList = new ArrayList<SingleAddressDetailHolder>();
 
                     for (SingleAddressDetailHolder addressholder : newSingleAddressDetailHolders) {
-                        if (addressholder.getFIRST_NAME().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                        if (addressholder.getLAST_NAME().toUpperCase().startsWith(constraint.toString().toUpperCase()))
                             nRedeemList.add(addressholder);
                     }
 
@@ -125,16 +131,92 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
 
 
             }
-        };
+        };*/
     }
 
     public void resetData() {
         this.newSingleAddressDetailHolders = this.originalSingleAddressDetailHolders;
     }
 
+    private class RedeemFilter extends Filter {
+        private AddressListAdapter addressListAdapter;
+        private List<SingleAddressDetailHolder> newSingleAddressDetailHolders;
+
+        public RedeemFilter(List<SingleAddressDetailHolder> newSingleAddressDetailHolders, AddressListAdapter addressListAdapter) {
+            this.addressListAdapter = addressListAdapter;
+            this.newSingleAddressDetailHolders = newSingleAddressDetailHolders;
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
 
 
-    public class AddressListViewHolder extends RecyclerView.ViewHolder  {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            /*     if (constraint == null || constraint.length() == 0) {
+                // No filter implemented we return all the list
+                results.values = originalSingleAddressDetailHolders;
+                results.count = originalSingleAddressDetailHolders.size();
+            } else {
+                List<SingleAddressDetailHolder> nRedeemList = new ArrayList<SingleAddressDetailHolder>();
+
+
+            *//*    for (SingleAddressDetailHolder p : newSingleAddressDetailHolders) {
+                    if (p.getFIRST_NAME().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                        nRedeemList.add(p);
+                }*//*
+
+                results.values = nRedeemList;
+                results.count = nRedeemList.size();
+            }*/
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            // Now we have to inform the adapter about the new list filtered
+            if (results.count == 0) {
+
+            } else {
+                newSingleAddressDetailHolders = (List<SingleAddressDetailHolder>) results.values;
+                notifyDataSetChanged();
+
+            }
+
+        }
+    }
+
+
+    public class AddressListViewHolder extends RecyclerView.ViewHolder {
         ItemClickListner itemClickListner;
         CardView cvContainerView;
         TextView tvContactsId, tvLastName, tvFirstName;
