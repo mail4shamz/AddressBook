@@ -1,10 +1,8 @@
 package com.mohammed.shameem.addressbook.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +33,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private List<SingleAddressDetailHolder> newSingleAddressDetailHolders;
     private DBTools dbTools = new DBTools(activity);
     private LayoutInflater inflater;
-    private Filter RedeemFilter;
+    private Filter AddressBookFilter;
 
-    public AddressListAdapter(Activity activity, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders, int ListItem) {
+    public AddressListAdapter(Activity activity, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolders) {
         this.activity = activity;
         this.originalSingleAddressDetailHolders = singleAddressDetailHolders;
         this.newSingleAddressDetailHolders = singleAddressDetailHolders;
@@ -93,124 +91,57 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
      */
     @Override
     public Filter getFilter() {
-        if (RedeemFilter == null)
-            RedeemFilter = new RedeemFilter(newSingleAddressDetailHolders, this);
-
-        return RedeemFilter;
-    /*    return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                FilterResults results = new FilterResults();
-                if (constraint == null || constraint.length() == 0) {
-                    // No filter implemented we return all the list
-                    results.values = originalSingleAddressDetailHolders;
-                    results.count = originalSingleAddressDetailHolders.size();
-                } else {
-                    List<SingleAddressDetailHolder> nRedeemList = new ArrayList<SingleAddressDetailHolder>();
-
-                    for (SingleAddressDetailHolder addressholder : newSingleAddressDetailHolders) {
-                        if (addressholder.getLAST_NAME().toUpperCase().startsWith(constraint.toString().toUpperCase()))
-                            nRedeemList.add(addressholder);
-                    }
-
-                    results.values = nRedeemList;
-                    results.count = nRedeemList.size();
-                }
-                return results;
-            }
-
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                if (results.count == 0) {
-                    notifyDataSetChanged();
-                } else {
-                    newSingleAddressDetailHolders = (List<SingleAddressDetailHolder>) results.values;
-                    notifyDataSetChanged();
-
-                }
+        if (AddressBookFilter == null)
+            AddressBookFilter = new AddressBookFilterClass(newSingleAddressDetailHolders, this);
+        return AddressBookFilter;
+        }
 
 
-            }
-        };*/
-    }
 
-    public void resetData() {
-        this.newSingleAddressDetailHolders = this.originalSingleAddressDetailHolders;
-    }
-
-    private class RedeemFilter extends Filter {
+    private class AddressBookFilterClass extends Filter {
         private AddressListAdapter addressListAdapter;
-        private List<SingleAddressDetailHolder> newSingleAddressDetailHolders;
+        private List<SingleAddressDetailHolder> filteredAddressList;
 
-        public RedeemFilter(List<SingleAddressDetailHolder> newSingleAddressDetailHolders, AddressListAdapter addressListAdapter) {
+        public AddressBookFilterClass(List<SingleAddressDetailHolder> filteredAddressList, AddressListAdapter addressListAdapter) {
             this.addressListAdapter = addressListAdapter;
-            this.newSingleAddressDetailHolders = newSingleAddressDetailHolders;
+            this.filteredAddressList = filteredAddressList;
         }
 
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
 
+            if (constraint != null && constraint.length() > 0) {
+                constraint = constraint.toString().toUpperCase();
+                ArrayList<SingleAddressDetailHolder> filteredSingleAddressDetailHolders = new ArrayList<>();
 
+                for (int i = 0; i < filteredAddressList.size(); i++) {
+                    //Loop through the list for Addresses
+                    if (filteredAddressList.get(i).getFIRST_NAME().toUpperCase().contains(constraint)) {
+                        filteredSingleAddressDetailHolders.add(filteredAddressList.get(i));
+                    }
 
+                }
+                results.count = filteredSingleAddressDetailHolders.size();
+                results.values = filteredSingleAddressDetailHolders;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            /*     if (constraint == null || constraint.length() == 0) {
-                // No filter implemented we return all the list
-                results.values = originalSingleAddressDetailHolders;
-                results.count = originalSingleAddressDetailHolders.size();
             } else {
-                List<SingleAddressDetailHolder> nRedeemList = new ArrayList<SingleAddressDetailHolder>();
+                results.count = filteredAddressList.size();
+                results.values = filteredAddressList;
+            }
 
 
-            *//*    for (SingleAddressDetailHolder p : newSingleAddressDetailHolders) {
-                    if (p.getFIRST_NAME().toUpperCase().startsWith(constraint.toString().toUpperCase()))
-                        nRedeemList.add(p);
-                }*//*
 
-                results.values = nRedeemList;
-                results.count = nRedeemList.size();
-            }*/
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             // Now we have to inform the adapter about the new list filtered
-            if (results.count == 0) {
 
-            } else {
-                newSingleAddressDetailHolders = (List<SingleAddressDetailHolder>) results.values;
-                notifyDataSetChanged();
+            addressListAdapter.originalSingleAddressDetailHolders = (List<SingleAddressDetailHolder>) results.values;
+            addressListAdapter.notifyDataSetChanged();
 
-            }
 
         }
     }

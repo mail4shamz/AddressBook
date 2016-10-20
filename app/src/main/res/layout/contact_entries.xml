@@ -27,30 +27,34 @@
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/tvLastName"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_5dp"
-                android:layout_weight="3.5"
-                android:gravity="center"
-                android:text="@string/contact_entries_ast_name"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/contactEntriesTextColor"
-                android:textSize="15sp"
-                android:textStyle="bold|italic" />
-
-            <TextView
                 android:id="@+id/tvFirstName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/padding_5dp"
-                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_margin="@dimen/margin_5dp"
+                android:paddingLeft="@dimen/margin_25dp"
                 android:layout_weight="3.5"
-                android:gravity="center"
+                android:gravity="left"
                 android:text="@string/contact_entries_first_name"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/contactEntriesTextColor"
                 android:textSize="15sp"
+                android:maxLines="1"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/tvLastName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_25dp"
+                android:layout_margin="@dimen/padding_5dp"
+                android:layout_marginLeft="@dimen/margin_15dp"
+                android:layout_weight="3.5"
+                android:gravity="left"
+                android:text="@string/contact_entries_last_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/contactEntriesTextColor"
+                android:textSize="15sp"
+                android:maxLines="1"
                 android:textStyle="bold|italic" />
 
             <LinearLayout

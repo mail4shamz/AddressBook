@@ -23,6 +23,8 @@ import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -46,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mainActivityIntent = getIntent();
         if (Intent.ACTION_SEARCH.equalsIgnoreCase(mainActivityIntent.getAction())) {
             searchQuery = mainActivityIntent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(MainActivity.this, "The searched Name is " + searchQuery, Toast.LENGTH_LONG).show();
         }
 
 
@@ -56,20 +57,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         AllContactsMapArrayList = dbToolsObject.getAllContacts();
-        Log.e("MainActivity", "All contacts " + AllContactsMapArrayList);
+
         for (int i = 0; i < AllContactsMapArrayList.size(); i++) {
             singleAddressDetailHolders.add(i, new SingleAddressDetailHolder(Integer.parseInt(AllContactsMapArrayList.get(i).get(Constants.ContactDetails.CONTACT_ID)),
-                            AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FIRST_NAME),
-                            AllContactsMapArrayList.get(i).get(Constants.ContactDetails.LAST_NAME),
-                            AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PHONE_NUMBER),
-                            AllContactsMapArrayList.get(i).get(Constants.ContactDetails.EMAIL_ADDRESS),
-                            AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FLASH_SWITCH)
-                    )
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.VIEW_POSTION),
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FIRST_NAME),
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.LAST_NAME),
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PHONE_NUMBER),
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.EMAIL_ADDRESS),
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FLASH_SWITCH),
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PROFILE_IMAGE))
             );
         }
+        Collections.sort(singleAddressDetailHolders, new Comparator<SingleAddressDetailHolder>() {
+            @Override
+            public int compare(SingleAddressDetailHolder lhs, SingleAddressDetailHolder rhs) {
+                return lhs.getFIRST_NAME().compareToIgnoreCase(rhs.getFIRST_NAME());
+            }
+
+
+        });
+
         Log.d("MainActivity", singleAddressDetailHolders.size() + " singleAddressDetailHolders");
-        /*addressListAdapter = new AddressListAdapter(MainActivity.this, AllContactsMapArrayList,R.layout.contact_entries);
-        mRecyclerView.setAdapter(addressListAdapter);*/
+
     }
 
     private void initViews() {
@@ -81,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setOnClickListener(this);
-        addressListAdapter = new AddressListAdapter(MainActivity.this, singleAddressDetailHolders, R.layout.contact_entries);
+        addressListAdapter = new AddressListAdapter(MainActivity.this, singleAddressDetailHolders);
         mRecyclerView.setAdapter(addressListAdapter);
     }
 
@@ -133,18 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onQueryTextChange(String newText) {
-
         addressListAdapter.getFilter().filter(newText);
-        Log.d("Main Activity", "Search Query" + newText);
-
-        /*if (TextUtils.isEmpty(newText)) {
-            addressListAdapter.getFilter().filter("");
-            addressListAdapter.resetData();
-        } else {
-            addressListAdapter.getFilter().filter(newText);
-        }*/
-
-        /*MainActivity.this.addressListAdapter.getFilter().filter(newText);*/
         return true;
     }
 }

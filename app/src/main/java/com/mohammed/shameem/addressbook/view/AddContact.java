@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AddContact extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "AddContactClass";
     private Toast customToast;
     private LinearLayout profilePicLinearLayout;
     private ImageView profilePicImageView;
@@ -143,7 +145,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
 
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                // Log.d(TAG, String.valueOf(bitmap));
+                Log.e(TAG, String.valueOf(bitmap));
                 profilePicImageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
