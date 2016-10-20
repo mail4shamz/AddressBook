@@ -1,7 +1,11 @@
 package com.mohammed.shameem.addressbook.view;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
@@ -13,10 +17,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
 import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.constants.Constants.ContactDetails;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.utils_classes.UtilValidate;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +39,8 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     private DBTools dbTools;
     private Map<String, String> dataStringHashMap;
     private static String Flash = "1";
+    private static final int GALARY_REQUEST_CODE = 18;
+    private static final int GALARY_REQUEST_KITKAT_CODE = 19;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +57,13 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
         customToast = new Toast(this);
         profilePicLinearLayout = (LinearLayout) findViewById(R.id.profilePicLinearLayout);
         profilePicImageView = (ImageView) findViewById(R.id.profilePicImageView);
+        profilePicLinearLayout.setOnClickListener(this);
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
         etEmailAddress = (EditText) findViewById(R.id.etEmailAddress);
         buttonAddContact = (Button) findViewById(R.id.buttonAddContact);
-        dataStringHashMap=new HashMap<>();
+        dataStringHashMap = new HashMap<>();
         buttonAddContact.setOnClickListener(this);
         dbTools = new DBTools(AddContact.this);
 
@@ -87,14 +97,63 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
                 dataStringHashMap.put(ContactDetails.EMAIL_ADDRESS, etEmailAddress.getText().toString().trim());
                 dataStringHashMap.put(ContactDetails.FLASH_SWITCH, Flash);
                 dbTools.insertContact(dataStringHashMap);
-                startActivity(new Intent(AddContact.this,MainActivity.class));
+                startActivity(new Intent(AddContact.this, MainActivity.class));
+            }
+        }
+        if (v.getId() == R.id.profilePicLinearLayout) {
+            if (Build.VERSION.SDK_INT <19){
+                Intent intent = new Intent();
+                intent.setType("image/jpeg");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)),GALARY_REQUEST_CODE);
+            } else {
+                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                intent.setType("image/jpeg");
+                startActivityForResult(intent, GALARY_REQUEST_KITKAT_CODE);
+            }
+
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Uri uri = data.getData();
+
+        try {
+            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+            // Log.d(TAG, String.valueOf(bitmap));
+            profilePicImageView.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (requestCode == GALARY_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            uri = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                // Log.d(TAG, String.valueOf(bitmap));
+                profilePicImageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if (requestCode == GALARY_REQUEST_KITKAT_CODE && resultCode == RESULT_OK && data != null && data.getData() != null){
+            uri = data.getData();
+
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                // Log.d(TAG, String.valueOf(bitmap));
+                profilePicImageView.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
 
     private boolean validateInputData() {
         if (etFirstName.getText().toString().isEmpty()) {
-            customToast = Toast.makeText(AddContact.this, R.string.toast_enter_first_name, Toast.LENGTH_SHORT);
+            customToast = Toast.makeText(AddContact.this, "Enter first name", Toast.LENGTH_SHORT);
             customToast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 100, 460);
             customToast.show();
             return false;
@@ -116,8 +175,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
             customToast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 100, 760);
             customToast.show();
             return false;
-        }
-        else {
+        } else {
 
             if (!UtilValidate.isValidEmail(etEmailAddress.getText().toString())) {
                 customToast = Toast.makeText(AddContact.this, "Enter valid email address", Toast.LENGTH_SHORT);

@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onQueryTextChange(String newText) {
 
         addressListAdapter.getFilter().filter(newText);
-        Log.d("Main Activity","Search Query"+newText);
+        Log.d("Main Activity", "Search Query" + newText);
 
         /*if (TextUtils.isEmpty(newText)) {
             addressListAdapter.getFilter().filter("");
