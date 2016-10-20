@@ -1,5 +1,4 @@
 package com.mohammed.shameem.addressbook.view;
-
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,25 +7,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.mohammed.shameem.addressbook.adapter.AddressListAdapter;
 import com.mohammed.shameem.addressbook.constants.Constants;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
     private Toolbar toolbar;
@@ -72,13 +66,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Collections.sort(singleAddressDetailHolders, new Comparator<SingleAddressDetailHolder>() {
             @Override
             public int compare(SingleAddressDetailHolder lhs, SingleAddressDetailHolder rhs) {
+                if(lhs.getFIRST_NAME().equalsIgnoreCase(rhs.getFIRST_NAME()))
+                {
+                    return lhs.getLAST_NAME().compareTo(rhs.getLAST_NAME());
+                }
                 return lhs.getFIRST_NAME().compareToIgnoreCase(rhs.getFIRST_NAME());
             }
 
 
         });
-
-        Log.d("MainActivity", singleAddressDetailHolders.size() + " singleAddressDetailHolders");
 
     }
 
