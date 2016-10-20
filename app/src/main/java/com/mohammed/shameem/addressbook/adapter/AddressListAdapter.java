@@ -119,6 +119,8 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
                     //Loop through the list for Addresses
                     if (filteredAddressList.get(i).getFIRST_NAME().toUpperCase().contains(constraint)) {
                         filteredSingleAddressDetailHolders.add(filteredAddressList.get(i));
+                    }else if (filteredAddressList.get(i).getLAST_NAME().toUpperCase().contains(constraint)){
+                        filteredSingleAddressDetailHolders.add(filteredAddressList.get(i));
                     }
 
                 }
