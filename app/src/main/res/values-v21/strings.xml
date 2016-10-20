@@ -4,4 +4,5 @@
     <string name="contact_entries_ast_name">Last Name</string>
     <string name="switch_set_flash_text">Set Flash</string>
     <string name="setflashtext">flash</string>
+    <string name="toast_enter_first_name">Enter first name</string>
 </resources>

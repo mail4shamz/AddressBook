@@ -19,7 +19,6 @@ import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.utils_classes.UtilValidate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class AddContact extends AppCompatActivity implements View.OnClickListener {
     private Toast customToast;
@@ -95,7 +94,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
 
     private boolean validateInputData() {
         if (etFirstName.getText().toString().isEmpty()) {
-            customToast = Toast.makeText(AddContact.this, "Enter first name", Toast.LENGTH_SHORT);
+            customToast = Toast.makeText(AddContact.this, R.string.toast_enter_first_name, Toast.LENGTH_SHORT);
             customToast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 100, 460);
             customToast.show();
             return false;
