@@ -18,4 +18,7 @@ public interface Constants {
         String FLASH_SWITCH = "FLASH_SWITCH";
         String PROFILE_IMAGE="PROFILE_IMAGE";
     }
+    interface KeysUsed{
+        String CONTACT_ID_KEY="contactId";
+    }
 }

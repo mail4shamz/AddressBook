@@ -1,8 +1,11 @@
 package com.mohammed.shameem.addressbook.adapter;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +18,11 @@ import android.widget.TextView;
 
 
 import com.mohammed.shameem.addressbook.R;
+import com.mohammed.shameem.addressbook.constants.Constants;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
 import com.mohammed.shameem.addressbook.interfaces.ItemClickListner;
+import com.mohammed.shameem.addressbook.view.EditContact;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +61,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     @Override
     public AddressListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         cardView = inflater.inflate(R.layout.contact_entries, parent, false);
-        AddressListViewHolder addressListViewHolder = new AddressListViewHolder(cardView);
+        AddressListViewHolder addressListViewHolder = new AddressListViewHolder(cardView,activity, (ArrayList<SingleAddressDetailHolder>) originalSingleAddressDetailHolders);
         return addressListViewHolder;
     }
 
@@ -94,8 +99,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         if (AddressBookFilter == null)
             AddressBookFilter = new AddressBookFilterClass(newSingleAddressDetailHolders, this);
         return AddressBookFilter;
-        }
-
+    }
 
 
     private class AddressBookFilterClass extends Filter {
@@ -119,7 +123,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
                     //Loop through the list for Addresses
                     if (filteredAddressList.get(i).getFIRST_NAME().toUpperCase().contains(constraint)) {
                         filteredSingleAddressDetailHolders.add(filteredAddressList.get(i));
-                    }else if (filteredAddressList.get(i).getLAST_NAME().toUpperCase().contains(constraint)){
+                    } else if (filteredAddressList.get(i).getLAST_NAME().toUpperCase().contains(constraint)) {
                         filteredSingleAddressDetailHolders.add(filteredAddressList.get(i));
                     }
 
@@ -133,14 +137,12 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
             }
 
 
-
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             // Now we have to inform the adapter about the new list filtered
-
             addressListAdapter.originalSingleAddressDetailHolders = (List<SingleAddressDetailHolder>) results.values;
             addressListAdapter.notifyDataSetChanged();
 
@@ -149,21 +151,34 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     }
 
 
-    public class AddressListViewHolder extends RecyclerView.ViewHolder {
-        ItemClickListner itemClickListner;
+    public class AddressListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        /*       ItemClickListner itemClickListner;*/
         CardView cvContainerView;
         TextView tvContactsId, tvLastName, tvFirstName;
         Switch switchFlashOnOff;
-
-        public AddressListViewHolder(View itemView) {
+        Context context;
+        ArrayList<SingleAddressDetailHolder> singleAddressDetailHolderItem=new ArrayList<>();
+        public AddressListViewHolder(View itemView,Context context,ArrayList<SingleAddressDetailHolder> singleAddressDetailHolderItem) {
             super(itemView);
+            this.singleAddressDetailHolderItem=singleAddressDetailHolderItem;
+            this.context=context;
             cvContainerView = (CardView) itemView.findViewById(R.id.cvContainerView);
             tvContactsId = (TextView) itemView.findViewById(R.id.tvContactsId);
             tvLastName = (TextView) itemView.findViewById(R.id.tvLastName);
             tvFirstName = (TextView) itemView.findViewById(R.id.tvFirstName);
             switchFlashOnOff = (Switch) itemView.findViewById(R.id.switchFlashOnOff);
-
+            itemView.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            String contactIdValue = tvContactsId.getText().toString();
+         /*   Log.e("AddressListViewHolder","ContactId Value  "+contactIdValue);*/
+            int postion = getAdapterPosition();
+            this.singleAddressDetailHolderItem.get(postion);;
+            Intent intent = new Intent(context, EditContact.class);
+            intent.putExtra(Constants.KeysUsed.CONTACT_ID_KEY, contactIdValue);
+            context.startActivity(intent);
+        }
     }
 }

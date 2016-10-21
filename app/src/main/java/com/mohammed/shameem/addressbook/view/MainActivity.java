@@ -22,7 +22,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private Toolbar toolbar;
     private Intent mainActivityIntent;
     private TextView tvContactsId;
@@ -66,11 +66,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Collections.sort(singleAddressDetailHolders, new Comparator<SingleAddressDetailHolder>() {
             @Override
             public int compare(SingleAddressDetailHolder lhs, SingleAddressDetailHolder rhs) {
-                if(lhs.getFIRST_NAME().equalsIgnoreCase(rhs.getFIRST_NAME()))
-                {
-                    return lhs.getLAST_NAME().compareTo(rhs.getLAST_NAME());
-                }
-                return lhs.getFIRST_NAME().compareToIgnoreCase(rhs.getFIRST_NAME());
+                return lhs.getFIRST_NAME().equalsIgnoreCase(rhs.getFIRST_NAME())?
+                        lhs.getLAST_NAME().compareTo(rhs.getLAST_NAME()):
+                        lhs.getFIRST_NAME().compareToIgnoreCase(rhs.getFIRST_NAME());
+
             }
 
 
@@ -86,21 +85,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRecyclerView = (RecyclerView) findViewById(R.id.card_recycler_view);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setOnClickListener(this);
         addressListAdapter = new AddressListAdapter(MainActivity.this, singleAddressDetailHolders);
         mRecyclerView.setAdapter(addressListAdapter);
     }
 
-
-    /**
-     * Called when a view has  clicked.
-     *
-     * @param v The view that was clicked.
-     */
-    @Override
-    public void onClick(View v) {
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -133,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        MainActivity.this.addressListAdapter.getFilter().filter(query);
+        addressListAdapter.getFilter().filter(query);
         return true;
     }
 
