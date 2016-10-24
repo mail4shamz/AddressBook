@@ -104,15 +104,15 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
         }
         if (v.getId() == R.id.profilePicLinearLayout) {
             if (Build.VERSION.SDK_INT <19){
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/jpeg");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)),GALARY_REQUEST_CODE);
             } else {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                intent.addCategory(Intent.CATEGORY_OPENABLE);
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/jpeg");
-                startActivityForResult(intent, GALARY_REQUEST_KITKAT_CODE);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)), GALARY_REQUEST_KITKAT_CODE);
             }
 
         }
@@ -121,15 +121,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri uri = data.getData();
-
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-            // Log.d(TAG, String.valueOf(bitmap));
-            profilePicImageView.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Uri uri;
         if (requestCode == GALARY_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uri = data.getData();
 

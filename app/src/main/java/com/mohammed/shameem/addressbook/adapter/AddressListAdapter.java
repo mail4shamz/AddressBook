@@ -16,13 +16,13 @@ import android.widget.Filterable;
 import android.widget.Switch;
 import android.widget.TextView;
 
-
 import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.constants.Constants;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
 import com.mohammed.shameem.addressbook.interfaces.ItemClickListner;
 import com.mohammed.shameem.addressbook.view.EditContact;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +36,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     private View cardView;
     private List<SingleAddressDetailHolder> originalSingleAddressDetailHolders;
     private List<SingleAddressDetailHolder> newSingleAddressDetailHolders;
-    private DBTools dbTools = new DBTools(activity);
     private LayoutInflater inflater;
     private Filter AddressBookFilter;
 
@@ -61,7 +60,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
     @Override
     public AddressListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         cardView = inflater.inflate(R.layout.contact_entries, parent, false);
-        AddressListViewHolder addressListViewHolder = new AddressListViewHolder(cardView,activity, (ArrayList<SingleAddressDetailHolder>) originalSingleAddressDetailHolders);
+        AddressListViewHolder addressListViewHolder = new AddressListViewHolder(cardView, activity, (ArrayList<SingleAddressDetailHolder>) originalSingleAddressDetailHolders);
         return addressListViewHolder;
     }
 
@@ -71,6 +70,7 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         holder.tvContactsId.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getCONTACT_ID()));
         holder.tvFirstName.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getFIRST_NAME()));
         holder.tvLastName.setText(String.valueOf(originalSingleAddressDetailHolders.get(position).getLAST_NAME()));
+
         if (holder.switchFlashOnOff != null) {
             holder.switchFlashOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -157,11 +157,12 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         TextView tvContactsId, tvLastName, tvFirstName;
         Switch switchFlashOnOff;
         Context context;
-        ArrayList<SingleAddressDetailHolder> singleAddressDetailHolderItem=new ArrayList<>();
-        public AddressListViewHolder(View itemView,Context context,ArrayList<SingleAddressDetailHolder> singleAddressDetailHolderItem) {
+        ArrayList<SingleAddressDetailHolder> singleAddressDetailHolderItem = new ArrayList<>();
+
+        public AddressListViewHolder(View itemView, Context context, ArrayList<SingleAddressDetailHolder> singleAddressDetailHolderItem) {
             super(itemView);
-            this.singleAddressDetailHolderItem=singleAddressDetailHolderItem;
-            this.context=context;
+            this.singleAddressDetailHolderItem = singleAddressDetailHolderItem;
+            this.context = context;
             cvContainerView = (CardView) itemView.findViewById(R.id.cvContainerView);
             tvContactsId = (TextView) itemView.findViewById(R.id.tvContactsId);
             tvLastName = (TextView) itemView.findViewById(R.id.tvLastName);
@@ -173,9 +174,9 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         @Override
         public void onClick(View v) {
             String contactIdValue = tvContactsId.getText().toString();
-         /*   Log.e("AddressListViewHolder","ContactId Value  "+contactIdValue);*/
+            Log.e("AddressListViewHolder", "ContactId Value  " + contactIdValue);
             int postion = getAdapterPosition();
-            this.singleAddressDetailHolderItem.get(postion);;
+            this.singleAddressDetailHolderItem.get(postion);
             Intent intent = new Intent(context, EditContact.class);
             intent.putExtra(Constants.KeysUsed.CONTACT_ID_KEY, contactIdValue);
             context.startActivity(intent);
