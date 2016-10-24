@@ -80,18 +80,18 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
                 HashMap<String, String> contactList = new HashMap<>();
                 Intent theIntent = getIntent();
                 String contactId = theIntent.getStringExtra(Constants.KeysUsed.CONTACT_ID_KEY);
-                contactList.put(Constants.KeysUsed.CONTACT_ID_KEY, contactId);
+                contactList.put(Constants.ContactDetails.CONTACT_ID, contactId);
                 contactList.put(Constants.ContactDetails.FIRST_NAME, etFirstName.getText().toString());
-                contactList.put(Constants.ContactDetails.FIRST_NAME, etLastName.getText().toString());
-                contactList.put(Constants.ContactDetails.LAST_NAME, etPhoneNumber.getText().toString());
+                contactList.put(Constants.ContactDetails.LAST_NAME, etLastName.getText().toString());
+                contactList.put(Constants.ContactDetails.PHONE_NUMBER, etPhoneNumber.getText().toString());
                 contactList.put(Constants.ContactDetails.EMAIL_ADDRESS, etEmail.getText().toString());
                 dbTools.updateContact(contactList);
                 theIntent = new Intent(EditContact.this, MainActivity.class);
                 theIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 EditContact.this.startActivity(theIntent);
-
-
                 break;
+
+
             case R.id.btDeleteContact:
                 theIntent = getIntent();
                 contactId = theIntent.getStringExtra(Constants.KeysUsed.CONTACT_ID_KEY);
