@@ -43,10 +43,10 @@
             android:id="@+id/etFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/padding_5dp"
+            android:layout_marginEnd="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:maxLength="10"
+
             android:hint="First Name"
             android:inputType="textPersonName"
             android:maxLines="1">
@@ -58,7 +58,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/etLastNameLayout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/etLastName"
@@ -66,7 +67,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
-            android:maxLength="10"
             android:ems="10"
             android:hint="Last Name"
             android:inputType="textPersonName"
@@ -76,7 +76,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/etPhoneNumberLayout" >
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/etPhoneNumber"
@@ -85,7 +86,7 @@
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:maxLength="20"
+
             android:hint="Phone Number"
             android:inputType="phone"
             android:maxLines="1" />
@@ -94,7 +95,8 @@
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/etEmailAddressLayout">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/etEmailAddress"
@@ -103,7 +105,7 @@
             android:layout_marginRight="@dimen/padding_5dp"
             android:layout_weight="1"
             android:ems="10"
-            android:maxLength="50"
+
             android:hint="Email Address"
             android:inputType="textEmailAddress"
             android:maxLines="1" />

@@ -6,12 +6,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +32,7 @@ import java.util.Map;
 
 public class AddContact extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "AddContactClass";
+    private TextInputLayout etFirstNameLayout, etLastNameLayout, etPhoneNumberLayout, etEmailAddressLayout;
     private Toast customToast;
     private LinearLayout profilePicLinearLayout;
     private ImageView profilePicImageView;
@@ -48,18 +51,128 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_contact);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initializeViews();
+        CheckFocus();
 
 
     }
+
+    private void CheckFocus() {
+        etFirstName.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d(getClass().getSimpleName(), "onTouch");
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    etFirstNameLayout.setCounterEnabled(true);
+                    etFirstNameLayout.setCounterMaxLength(13);
+                    v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (!hasFocus) {
+                                etFirstNameLayout.setCounterEnabled(false);
+                            } else {
+                                etFirstNameLayout.setCounterEnabled(true);
+
+                            }
+
+                        }
+                    });
+                }
+
+                return false;
+            }
+        });
+
+
+        etLastName.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    Log.d(getClass().getSimpleName(), "onTouch");
+                    etLastNameLayout.setCounterEnabled(true);
+                    etLastNameLayout.setCounterMaxLength(13);
+                    v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (!hasFocus) {
+                                etLastNameLayout.setCounterEnabled(false);
+                            } else {
+                                etLastNameLayout.setCounterEnabled(true);
+
+                            }
+                        }
+                    });
+                }
+
+                return false;
+            }
+        });
+        etPhoneNumber.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    Log.d(getClass().getSimpleName(), "onTouch");
+                    etPhoneNumberLayout.setCounterEnabled(true);
+                    etPhoneNumberLayout.setCounterMaxLength(13);
+                    v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (!hasFocus) {
+                                etPhoneNumberLayout.setCounterEnabled(false);
+                            } else {
+                                etPhoneNumberLayout.setCounterEnabled(true);
+
+                            }
+                        }
+                    });
+                }
+
+                return false;
+            }
+        });
+
+        etEmailAddress.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.d(getClass().getSimpleName(), "onTouch");
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    etEmailAddressLayout.setCounterEnabled(true);
+                    etEmailAddressLayout.setCounterMaxLength(13);
+                    v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                        @Override
+                        public void onFocusChange(View v, boolean hasFocus) {
+                            if (!hasFocus) {
+                                etEmailAddressLayout.setCounterEnabled(false);
+                            } else {
+                                etEmailAddressLayout.setCounterEnabled(true);
+
+                            }
+                        }
+                    });
+                }
+                return false;
+            }
+        });
+    }
+
 
     private void initializeViews() {
         customToast = new Toast(this);
         profilePicLinearLayout = (LinearLayout) findViewById(R.id.profilePicLinearLayout);
         profilePicImageView = (ImageView) findViewById(R.id.profilePicImageView);
         profilePicLinearLayout.setOnClickListener(this);
+
+        etFirstNameLayout = (TextInputLayout) findViewById(R.id.etFirstNameLayout);
+        etLastNameLayout = (TextInputLayout) findViewById(R.id.etLastNameLayout);
+        etPhoneNumberLayout = (TextInputLayout) findViewById(R.id.etPhoneNumberLayout);
+        etEmailAddressLayout = (TextInputLayout) findViewById(R.id.etEmailAddressLayout);
+
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
@@ -69,7 +182,9 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
         buttonAddContact.setOnClickListener(this);
         dbTools = new DBTools(AddContact.this);
 
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,11 +218,11 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
             }
         }
         if (v.getId() == R.id.profilePicLinearLayout) {
-            if (Build.VERSION.SDK_INT <19){
+            if (Build.VERSION.SDK_INT < 19) {
                 Intent intent = new Intent();
                 intent.setType("image/jpeg");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)),GALARY_REQUEST_CODE);
+                startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)), GALARY_REQUEST_CODE);
             } else {
                 Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -140,7 +255,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }else if (requestCode == GALARY_REQUEST_KITKAT_CODE && resultCode == RESULT_OK && data != null && data.getData() != null){
+        } else if (requestCode == GALARY_REQUEST_KITKAT_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
             uri = data.getData();
 
             try {
