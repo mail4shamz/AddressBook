@@ -220,15 +220,18 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
             }
         }
         if (v.getId() == R.id.profilePicLinearLayout) {
+
             if (Build.VERSION.SDK_INT < 19) {
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/jpeg");
                 startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)), GALARY_REQUEST_CODE);
             } else {
+
                 Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/jpeg");
-                startActivityForResult(intent, GALARY_REQUEST_KITKAT_CODE);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)), GALARY_REQUEST_KITKAT_CODE);
             }
 
         }
@@ -237,7 +240,6 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         try {
             if (data.getData() != null) {
                 Uri uri = data.getData();
@@ -254,6 +256,7 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
                 }
             } else {
                 Toast.makeText(this, "No Image to set", Toast.LENGTH_SHORT).show();
+
             }
         } catch (Exception e) {
             Log.e(TAG, "Error Message " + e.getMessage());

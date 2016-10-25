@@ -19,6 +19,7 @@ import com.mohammed.shameem.addressbook.constants.Constants;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class EditContact extends AppCompatActivity implements View.OnClickListener {
     Intent theIntent;
@@ -184,7 +185,7 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btEditContacts:
-                HashMap<String, String> contactList = new HashMap<>();
+                Map<String, String> contactList = new HashMap<>();
                 Intent theIntent = getIntent();
                 String contactId = theIntent.getStringExtra(Constants.KeysUsed.CONTACT_ID_KEY);
                 contactList.put(Constants.ContactDetails.CONTACT_ID, contactId);
