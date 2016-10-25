@@ -40,6 +40,7 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
         checkFocus();
 
 
+
     }
 
     private void checkFocus() {

@@ -51,17 +51,16 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onStart() {
         super.onStart();
         AllContactsMapArrayList = dbToolsObject.getAllContacts();
-
         for (int i = 0; i < AllContactsMapArrayList.size(); i++) {
-            singleAddressDetailHolders.add(i, new SingleAddressDetailHolder(Integer.parseInt(AllContactsMapArrayList.get(i).get(Constants.ContactDetails.CONTACT_ID)),
+            singleAddressDetailHolders.add(i, new SingleAddressDetailHolder(Integer.parseInt(
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.CONTACT_ID)),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.VIEW_POSTION),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FIRST_NAME),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.LAST_NAME),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PHONE_NUMBER),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.EMAIL_ADDRESS),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FLASH_SWITCH),
-                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PROFILE_IMAGE))
-            );
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PROFILE_IMAGE)));
         }
         Collections.sort(singleAddressDetailHolders, new Comparator<SingleAddressDetailHolder>() {
             @Override

@@ -2,6 +2,7 @@ package com.mohammed.shameem.addressbook.view;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.constants.Constants.ContactDetails;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.utils_classes.UtilValidate;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -219,12 +221,11 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
         }
         if (v.getId() == R.id.profilePicLinearLayout) {
             if (Build.VERSION.SDK_INT < 19) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.setType("image/jpeg");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, getResources().getString(R.string.select_picture)), GALARY_REQUEST_CODE);
             } else {
-                Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/jpeg");
                 startActivityForResult(intent, GALARY_REQUEST_KITKAT_CODE);
@@ -236,36 +237,29 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri uri = data.getData();
 
         try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-            // Log.d(TAG, String.valueOf(bitmap));
-            profilePicImageView.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (requestCode == GALARY_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            uri = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                // Log.d(TAG, String.valueOf(bitmap));
-                profilePicImageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (data.getData() != null) {
+                Uri uri = data.getData();
+                if (uri != null) {
+                    if (requestCode == GALARY_REQUEST_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+                        uri = data.getData();
+                        Picasso.with(getApplicationContext()).load(uri).fit().into(profilePicImageView);
+                    } else if (requestCode == GALARY_REQUEST_KITKAT_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+                        uri = data.getData();
+                        Picasso.with(getApplicationContext()).load(uri).fit().into(profilePicImageView);
+                    }
+                } else {
+                    Toast.makeText(this, "No Image to set", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "No Image to set", Toast.LENGTH_SHORT).show();
             }
-        } else if (requestCode == GALARY_REQUEST_KITKAT_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            uri = data.getData();
-
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                Log.e(TAG, String.valueOf(bitmap));
-                profilePicImageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error Message " + e.getMessage());
         }
+
+
     }
 
     private boolean validateInputData() {
