@@ -55,10 +55,16 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_add_contact);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initializeViews();
+
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         CheckFocus();
-
-
     }
 
     private void CheckFocus() {
@@ -187,6 +193,11 @@ public class AddContact extends AppCompatActivity implements View.OnClickListene
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initializeViews();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
