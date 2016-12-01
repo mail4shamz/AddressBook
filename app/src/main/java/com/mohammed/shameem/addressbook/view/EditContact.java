@@ -1,5 +1,4 @@
 package com.mohammed.shameem.addressbook.view;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -155,7 +154,6 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
     private void initViews() {
         profilePicLinearLayout = (LinearLayout) findViewById(R.id.profilePicLinearLayout);
         profilePicImageView = (ImageView) findViewById(R.id.profilePicImageView);
-
         etFirstName = (EditText) findViewById(R.id.etFirstName);
         etLastName = (EditText) findViewById(R.id.etLastName);
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);

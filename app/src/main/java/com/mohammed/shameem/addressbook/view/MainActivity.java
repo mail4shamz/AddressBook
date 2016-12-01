@@ -1,4 +1,5 @@
 package com.mohammed.shameem.addressbook.view;
+
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +11,15 @@ import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.adapter.AddressListAdapter;
 import com.mohammed.shameem.addressbook.constants.Constants;
 import com.mohammed.shameem.addressbook.controller.DBTools;
-import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;

@@ -23,7 +23,6 @@ import com.mohammed.shameem.addressbook.view.EditContact;
 
 import java.util.ArrayList;
 import java.util.List;
-
 /**
  * Created by shameem on 6/19/2016.
  */
