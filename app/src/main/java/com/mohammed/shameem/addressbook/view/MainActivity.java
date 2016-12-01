@@ -2,6 +2,7 @@ package com.mohammed.shameem.addressbook.view;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.mohammed.shameem.addressbook.adapter.AddressListAdapter;
 import com.mohammed.shameem.addressbook.constants.Constants;
 import com.mohammed.shameem.addressbook.controller.DBTools;
@@ -38,30 +41,27 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initViews();
-        mainActivityIntent = getIntent();
-        if (Intent.ACTION_SEARCH.equalsIgnoreCase(mainActivityIntent.getAction())) {
-            searchQuery = mainActivityIntent.getStringExtra(SearchManager.QUERY);
-        }
 
 
     }
 
+
+
     @Override
     protected void onStart() {
         super.onStart();
+        initViews();
         AllContactsMapArrayList = dbToolsObject.getAllContacts();
-
         for (int i = 0; i < AllContactsMapArrayList.size(); i++) {
-            singleAddressDetailHolders.add(i, new SingleAddressDetailHolder(Integer.parseInt(AllContactsMapArrayList.get(i).get(Constants.ContactDetails.CONTACT_ID)),
+            singleAddressDetailHolders.add(i, new SingleAddressDetailHolder(Integer.parseInt(
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.CONTACT_ID)),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.VIEW_POSTION),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FIRST_NAME),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.LAST_NAME),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PHONE_NUMBER),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.EMAIL_ADDRESS),
                     AllContactsMapArrayList.get(i).get(Constants.ContactDetails.FLASH_SWITCH),
-                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PROFILE_IMAGE))
-            );
+                    AllContactsMapArrayList.get(i).get(Constants.ContactDetails.PROFILE_IMAGE)));
         }
         Collections.sort(singleAddressDetailHolders, new Comparator<SingleAddressDetailHolder>() {
             @Override
@@ -74,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
 
         });
+        if(Looper.getMainLooper() == Looper.myLooper()) {
+            // Current Thread is Main Thread.
+            Toast.makeText(this, "This is running in main thread", Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -130,4 +134,5 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         addressListAdapter.getFilter().filter(newText);
         return true;
     }
+
 }

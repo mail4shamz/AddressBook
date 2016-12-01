@@ -37,10 +37,17 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_edit_contact);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        initViews();
+
+
+
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         checkFocus();
-
-
     }
 
     private void checkFocus() {
@@ -168,6 +175,7 @@ public class EditContact extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onStart() {
         super.onStart();
+        initViews();
         Intent theIntent = getIntent();
         String contactId = theIntent.getStringExtra(Constants.KeysUsed.CONTACT_ID_KEY);
         HashMap<String, String> contactList = dbTools.getContactInformation(contactId);
