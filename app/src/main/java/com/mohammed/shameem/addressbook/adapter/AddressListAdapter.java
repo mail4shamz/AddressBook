@@ -1,5 +1,4 @@
 package com.mohammed.shameem.addressbook.adapter;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,14 +14,12 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Switch;
 import android.widget.TextView;
-
 import com.mohammed.shameem.addressbook.R;
 import com.mohammed.shameem.addressbook.constants.Constants;
 import com.mohammed.shameem.addressbook.controller.DBTools;
 import com.mohammed.shameem.addressbook.holder.SingleAddressDetailHolder;
 import com.mohammed.shameem.addressbook.interfaces.ItemClickListner;
 import com.mohammed.shameem.addressbook.view.EditContact;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -174,7 +171,6 @@ public class AddressListAdapter extends RecyclerView.Adapter<AddressListAdapter.
         @Override
         public void onClick(View v) {
             String contactIdValue = tvContactsId.getText().toString();
-            Log.e("AddressListViewHolder", "ContactId Value  " + contactIdValue);
             int postion = getAdapterPosition();
             this.singleAddressDetailHolderItem.get(postion);
             Intent intent = new Intent(context, EditContact.class);
